@@ -1,0 +1,105 @@
+﻿html {
+    height: 100%;
+}
+
+body {
+    height: 100%;
+    background-color: #27ae60;
+}
+
+.vertical-center {
+    vertical-align: middle !important;
+}
+
+.panel-default {
+    margin-top: 30px;
+}
+
+.panel-default > .panel-heading {
+    color: #ecf0f1;
+    background-color: #34495e;
+}
+
+.menu {
+    display: none;
+}
+
+.menu-item {
+    list-style: none;
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+.no-padding {
+    padding: 0;
+}
+
+
+.menuContainer .menuToggle .pointer {
+    transition: all .2s ease-in-out;
+}
+
+.menuContainer.open .menuToggle .pointer {
+    transform: rotate(180deg);
+}
+
+#wrapper {
+    height: 100%;
+}
+#page-wrapper {
+    position: relative !important;
+    background-color: #ecf0f1;
+    min-height: 100%;
+    top: -51px;
+    padding-top: 51px !important;
+}
+
+.panel-footer {
+    background-color: #fff;
+}
+
+.navbar, .navbar-default {
+    background-color: #27ae60;
+}
+
+.navbar-default .navbar-brand:hover {
+    color: #bdc3c7;
+}
+
+.navbar-default .navbar-collapse, .navbar-default .navbar-form, .navbar {
+    border-color: #2ecc71;
+}
+
+.nav > li > a:hover {
+    background-color: #2ecc71;
+    color: #ecf0f1;
+}
+
+.navbar-default .navbar-brand, .navbar-top-links li a, .nav>li>a {
+    color: #ecf0f1;
+}
+
+.navbar-default .navbar-toggle .icon-bar {
+    background-color: #ecf0f1;
+}
+
+.navbar .navbar-toggle:hover, .navbar .navbar-toggle:focus {
+    background-color: #2ecc71;
+}
+
+.sidebar ul li {
+    border-bottom: 1px solid #2ecc71;
+}
+
+.sidebar ul li a.active {
+    background-color: #2ecc71;
+}
+
+.btn.btn-curve-left {
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+.btn.btn-curve-right {
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+}
