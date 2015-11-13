@@ -32,8 +32,18 @@ namespace Library_System.DAL
                     LastName = "Joel",
                     StudentId = "901111111"
                 },
-                new Student {FirstName = "Thomas", LastName = "Brand", StudentId = "901526289" },
-                new Student {FirstName = "Tony", LastName = "Stark", StudentId = "901038592" },
+                new Student
+                {
+                    FirstName = "Thomas",
+                    LastName = "Brand",
+                    StudentId = "901526289"
+                },
+                new Student
+                {
+                    FirstName = "Tony",
+                    LastName = "Stark",
+                    StudentId = "901038592"
+                },
                 new Student
                 {
                     FirstName = "Thor",

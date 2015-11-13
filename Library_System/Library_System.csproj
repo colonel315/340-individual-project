@@ -177,7 +177,6 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="DAL\LibraryContext.cs" />
     <Compile Include="DAL\LibraryInitializer.cs" />
     <Compile Include="Global.asax.cs">
@@ -187,10 +186,10 @@
     <Compile Include="Models\CD.cs" />
     <Compile Include="Models\CheckOut.cs" />
     <Compile Include="Models\Faculty.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\IdentityModel.cs" />
     <Compile Include="Models\ItemBaseModel.cs" />
     <Compile Include="Models\Librarian.cs" />
-    <Compile Include="Models\LoginModel.cs" />
+    <Compile Include="Models\LoginViewModel.cs" />
     <Compile Include="Models\Magazine.cs" />
     <Compile Include="Models\Periodical.cs" />
     <Compile Include="Models\Student.cs" />

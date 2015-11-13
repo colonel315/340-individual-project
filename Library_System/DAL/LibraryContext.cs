@@ -11,7 +11,7 @@ namespace Library_System.DAL
     [DbConfigurationType(typeof(MySql.Data.Entity.MySqlEFConfiguration))]
     public class LibraryContext : DbContext
     {
-        public LibraryContext() : base("DefaultConnection"){}
+        public LibraryContext() : base("LibraryContext") {}
 
         // User Models
         public DbSet<UserBaseModel> UserBaseModels { get; set; }
