@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Library_System.Models
 {
-    public class LoginModel
+    public class LoginViewModel
     {
         [Required]
         [Display(Name = "Employee Number")]

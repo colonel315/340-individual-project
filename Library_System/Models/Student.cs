@@ -7,5 +7,6 @@ namespace Library_System.Models
 {
     public class Student : UserBaseModel
     {
+        public string StudentId { get; set; }
     }
 }

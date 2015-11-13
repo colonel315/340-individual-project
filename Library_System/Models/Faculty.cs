@@ -7,6 +7,6 @@ namespace Library_System.Models
 {
     public class Faculty : UserBaseModel
     {
-        
+        public string FacultyId { get; set; }
     }
 }
