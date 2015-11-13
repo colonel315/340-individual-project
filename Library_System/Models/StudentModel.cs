@@ -5,9 +5,8 @@ using System.Web;
 
 namespace Library_System.Models
 {
-    public class Librarian : UserBaseModel
+    public class StudentModel : UserBaseModel
     {
-        public string EmployeeId { get; set; }
-        public string Password { get; set; }
+        public string StudentId { get; set; }
     }
 }

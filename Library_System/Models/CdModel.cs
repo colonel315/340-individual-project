@@ -5,8 +5,8 @@ using System.Web;
 
 namespace Library_System.Models
 {
-    public class Faculty : UserBaseModel
+    public class CdModel : ItemBaseModel
     {
-        public string FacultyId { get; set; }
+        public string Director { get; set; }
     }
 }

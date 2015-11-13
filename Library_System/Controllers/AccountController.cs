@@ -66,7 +66,7 @@ namespace Library_System.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(LoginViewModel model, string returnUrl)
+        public async Task<ActionResult> Index(LibrarianModel model, string returnUrl)
         {
             if (!ModelState.IsValid)
             {
@@ -75,7 +75,7 @@ namespace Library_System.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.EmployeeNumber, model.Password, false, false);
+            var result = await SignInManager.PasswordSignInAsync(model.EmployeeId, model.Password, false, false);
             switch (result)
             {
                 case SignInStatus.Success:

@@ -10,9 +10,9 @@ namespace Library_System.DAL
     {
         protected override void Seed(LibraryContext libraryContext)
         {
-            var librarian = new List<Librarian>
+            var librarian = new List<LibrarianModel>
             {
-                new Librarian
+                new LibrarianModel
                 {
                     FirstName = "Fred",
                     LastName = "Burr",
@@ -21,30 +21,30 @@ namespace Library_System.DAL
                 }
             };
 
-            librarian.ForEach(l => libraryContext.Librarians.Add(l));
+            librarian.ForEach(l => libraryContext.UserBaseModels.Add(l));
             libraryContext.SaveChanges();
 
-            var student = new List<Student>
+            var student = new List<StudentModel>
             {
-                new Student
+                new StudentModel
                 {
                     FirstName = "Billy",
                     LastName = "Joel",
                     StudentId = "901111111"
                 },
-                new Student
+                new StudentModel
                 {
                     FirstName = "Thomas",
                     LastName = "Brand",
                     StudentId = "901526289"
                 },
-                new Student
+                new StudentModel
                 {
                     FirstName = "Tony",
                     LastName = "Stark",
                     StudentId = "901038592"
                 },
-                new Student
+                new StudentModel
                 {
                     FirstName = "Thor",
                     LastName = "Odinson",
@@ -52,24 +52,24 @@ namespace Library_System.DAL
                 }
             };
 
-            student.ForEach(s => libraryContext.Students.Add(s));
+            student.ForEach(s => libraryContext.UserBaseModels.Add(s));
             libraryContext.SaveChanges();
 
-            var faculty = new List<Faculty>
+            var faculty = new List<FacultyModel>
             {
-                new Faculty
+                new FacultyModel
                 {
                     FirstName = "Kuangnan",
                     LastName = "Chang",
                     FacultyId = "901428584"
                 },
-                new Faculty
+                new FacultyModel
                 {
                     FirstName = "Kirk",
                     LastName = "Jones",
                     FacultyId = "901582795"
                 },
-                new Faculty
+                new FacultyModel
                 {
                     FirstName = "John",
                     LastName = "Gaffney",
@@ -77,7 +77,7 @@ namespace Library_System.DAL
                 }
             };
 
-            faculty.ForEach(f => libraryContext.Faculties.Add(f));
+            faculty.ForEach(f => libraryContext.UserBaseModels.Add(f));
             libraryContext.SaveChanges();
         }
     }

@@ -15,19 +15,19 @@ namespace Library_System.DAL
 
         // User Models
         public DbSet<UserBaseModel> UserBaseModels { get; set; }
-        public DbSet<Librarian> Librarians { get; set; }
-        public DbSet<Faculty> Faculties { get; set; }
-        public DbSet<Student> Students { get; set; }
+        /*public DbSet<LibrarianModel> Librarians { get; set; }
+        public DbSet<FacultyModel> Faculties { get; set; }
+        public DbSet<StudentModel> Students { get; set; }*/
 
-        // Many to Many Relation
-        public DbSet<CheckOut> CheckOuts { get; set; }
+        // Containts checkout date
+        public DbSet<CheckOutModel> CheckOuts { get; set; }
 
         // Item Models
         public DbSet<ItemBaseModel> ItemBaseModels { get; set; }
-        public DbSet<Book> Books { get; set; }
-        public DbSet<Periodical> Periodicals { get; set; }
-        public DbSet<Magazine> Magazines { get; set; }
-        public DbSet<CD> Cds { get; set; }
+        /*public DbSet<BookModel> Books { get; set; }
+        public DbSet<PeriodicalModel> Periodicals { get; set; }
+        public DbSet<MagazineModel> Magazines { get; set; }
+        public DbSet<CdModel> Cds { get; set; }*/
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
