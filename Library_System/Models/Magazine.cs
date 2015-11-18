@@ -5,8 +5,8 @@ using System.Web;
 
 namespace Library_System.Models
 {
-    public class CdModel : ItemBaseModel
+    public class Magazine : ItemBase
     {
-        public string Director { get; set; }
+        public string Publisher { get; set; }
     }
 }

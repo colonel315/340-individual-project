@@ -29,5 +29,9 @@ namespace Library_System.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<Library_System.Models.Librarian> Librarians { get; set; }
+
+        public System.Data.Entity.DbSet<Library_System.Models.Student> UserBases { get; set; }
     }
 }

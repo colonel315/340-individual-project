@@ -6,7 +6,7 @@ using System.Web;
 
 namespace Library_System.Models
 {
-    public class LibrarianModel : UserBaseModel
+    public class Librarian : UserBase
     {
         [Required]
         [Display(Name = "Employee Number")]

@@ -5,7 +5,7 @@ using System.Web;
 
 namespace Library_System.Models
 {
-    public class BookModel : ItemBaseModel
+    public class Book : ItemBase
     {
         public string Version { get; set; }
         public string Author { get; set; }

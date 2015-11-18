@@ -7,14 +7,16 @@ using System.Web;
 
 namespace Library_System.Models
 {
-    public class ItemBaseModel
+    public class UserBase
     {
         public int Id { get; set; }
 
-        public string Year { get; set; }
-        public string Title { get; set; }
-        public int Amount { get; set; }
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; }
 
-        public ICollection<CheckOutModel> CheckOuts { get; set; }
+        [Display(Name = "First Name")]
+        public string FirstName { get; set; }
+
+        public ICollection<CheckOut> CheckOuts { get; set; }
     }
 }

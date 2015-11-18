@@ -66,7 +66,7 @@ namespace Library_System.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Index(LibrarianModel model, string returnUrl)
+        public async Task<ActionResult> Index(Librarian model, string returnUrl)
         {
             if (!ModelState.IsValid)
             {
