@@ -103,3 +103,6 @@ body {
     border-top-right-radius: 30px;
     border-bottom-right-radius: 30px;
 }
+.nav > li > a:hover, .nav > li > a:focus {
+    background-color: #2ecc71;
+}
