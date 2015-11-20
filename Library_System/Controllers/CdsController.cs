@@ -11,108 +11,108 @@ using Library_System.Models;
 
 namespace Library_System.Controllers
 {
-    public class BooksController : Controller
+    public class CdsController : Controller
     {
         private LibraryContext db = new LibraryContext();
 
-        // GET: Books
+        // GET: Cds
         public ActionResult Index()
         {
             return View();
-//            return View(db.ItemBases.ToList());
+//            return View((Cd)db.ItemBases.ToList());
         }
 
-        // GET: Books/Details/5
+        // GET: Cds/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Book book = (Book)db.ItemBases.Find(id);
-            if (book == null)
+            Cd cd = (Cd)db.ItemBases.Find(id);
+            if (cd == null)
             {
                 return HttpNotFound();
             }
-            return View(book);
+            return View(cd);
         }
 
-        // GET: Books/Create
+        // GET: Cds/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Books/Create
+        // POST: Cds/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Year,Title,Amount,Version,Author,Publisher")] Book book)
+        public ActionResult Create([Bind(Include = "Id,Year,Title,Amount,Artist,Director")] Cd cd)
         {
             if (ModelState.IsValid)
             {
-                db.ItemBases.Add(book);
+                db.ItemBases.Add(cd);
                 db.SaveChanges();
-                return RedirectToAction("Create");
+                return RedirectToAction("Index");
             }
 
-            return View(book);
+            return View(cd);
         }
 
-        // GET: Books/Edit/5
+        // GET: Cds/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Book book = (Book)db.ItemBases.Find(id);
-            if (book == null)
+            Cd cd = (Cd)db.ItemBases.Find(id);
+            if (cd == null)
             {
                 return HttpNotFound();
             }
-            return View(book);
+            return View(cd);
         }
 
-        // POST: Books/Edit/5
+        // POST: Cds/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Year,Title,Amount,Version,Author,Publisher")] Book book)
+        public ActionResult Edit([Bind(Include = "Id,Year,Title,Amount,Artist,Director")] Cd cd)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(book).State = EntityState.Modified;
+                db.Entry(cd).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(book);
+            return View(cd);
         }
 
-        // GET: Books/Delete/5
+        // GET: Cds/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Book book = (Book)db.ItemBases.Find(id);
-            if (book == null)
+            Cd cd = (Cd)db.ItemBases.Find(id);
+            if (cd == null)
             {
                 return HttpNotFound();
             }
-            return View(book);
+            return View(cd);
         }
 
-        // POST: Books/Delete/5
+        // POST: Cds/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Book book = (Book)db.ItemBases.Find(id);
-            db.ItemBases.Remove(book);
+            Cd cd = (Cd)db.ItemBases.Find(id);
+            db.ItemBases.Remove(cd);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

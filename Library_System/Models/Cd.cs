@@ -7,6 +7,7 @@ namespace Library_System.Models
 {
     public class Cd : ItemBase
     {
+        public string Artist { get; set; }
         public string Director { get; set; }
     }
 }

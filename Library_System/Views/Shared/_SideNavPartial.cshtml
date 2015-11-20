@@ -10,13 +10,13 @@
     </a>
     <ul class="nav nav-second-level collapse">
         <li>
-            <a href="@Url.Action("Details", "Students")">
+            <a href="@Url.Action("Index", "Students")">
                 <i class="fa fa-search"></i>
                 Search Students
             </a>
         </li>
         <li>
-            <a href="@Url.Action("Details", "Faculties")">
+            <a href="@Url.Action("Index", "Faculties")">
                 <i class="fa fa-search"></i>
                 Search Faculty
             </a>
@@ -42,9 +42,15 @@
     </a>
     <ul class="nav nav-second-level collapse">
         <li>
-            <a href="@Url.Action("Details", "Books")">
+            <a href="@Url.Action("Index", "Books")">
                 <i class="fa fa-search"></i>
                 Search Books
+            </a>
+        </li>
+        <li>
+            <a href="@Url.Action("Index", "Cds")">
+                <i class="fa fa-search"></i>
+                Search CDs/DVDs
             </a>
         </li>
 
@@ -54,11 +60,10 @@
                 Add Books
             </a>
         </li>
-        
         <li>
-            <a href="@Url.Action("Delete", "Books")">
-                <i class="fa fa-minus"></i>
-                Remove Books
+            <a href="@Url.Action("Create", "Cds")">
+                <i class="fa fa-plus"></i>
+                Add CDs/DVDs
             </a>
         </li>
         
