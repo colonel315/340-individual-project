@@ -181,6 +181,8 @@
     <Compile Include="Controllers\FacultiesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LibrariansController.cs" />
+    <Compile Include="Controllers\MagazinesController.cs" />
+    <Compile Include="Controllers\PeriodicalsController.cs" />
     <Compile Include="Controllers\StudentsController.cs" />
     <Compile Include="DAL\LibraryContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -194,7 +196,9 @@
     <Compile Include="Models\IdentityModel.cs" />
     <Compile Include="Models\ItemBase.cs" />
     <Compile Include="Models\Librarian.cs" />
+    <Compile Include="Models\LiteratureBase.cs" />
     <Compile Include="Models\Magazine.cs" />
+    <Compile Include="Models\PaperBase.cs" />
     <Compile Include="Models\Periodical.cs" />
     <Compile Include="Models\Student.cs" />
     <Compile Include="Models\UserBase.cs" />
@@ -313,6 +317,16 @@
     <Content Include="Views\Cds\Details.cshtml" />
     <Content Include="Views\Cds\Edit.cshtml" />
     <Content Include="Views\Cds\Index.cshtml" />
+    <Content Include="Views\Magazines\Create.cshtml" />
+    <Content Include="Views\Magazines\Delete.cshtml" />
+    <Content Include="Views\Magazines\Details.cshtml" />
+    <Content Include="Views\Magazines\Edit.cshtml" />
+    <Content Include="Views\Magazines\Index.cshtml" />
+    <Content Include="Views\Periodicals\Create.cshtml" />
+    <Content Include="Views\Periodicals\Delete.cshtml" />
+    <Content Include="Views\Periodicals\Details.cshtml" />
+    <Content Include="Views\Periodicals\Edit.cshtml" />
+    <Content Include="Views\Periodicals\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

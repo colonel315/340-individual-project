@@ -11,108 +11,108 @@ using Library_System.Models;
 
 namespace Library_System.Controllers
 {
-    public class CdsController : Controller
+    public class MagazinesController : Controller
     {
         private LibraryContext db = new LibraryContext();
 
-        // GET: Cds
+        // GET: Magazines
         public ActionResult Index()
         {
             return View();
-//            return View((Cd)db.ItemBases.ToList());
+//            return View(db.ItemBases.ToList());
         }
 
-        // GET: Cds/Details/5
+        // GET: Magazines/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cd cd = (Cd)db.ItemBases.Find(id);
-            if (cd == null)
+            Magazine magazine = (Magazine)db.ItemBases.Find(id);
+            if (magazine == null)
             {
                 return HttpNotFound();
             }
-            return View(cd);
+            return View(magazine);
         }
 
-        // GET: Cds/Create
+        // GET: Magazines/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Cds/Create
+        // POST: Magazines/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Year,Title,Amount,Artist,Director")] Cd cd)
+        public ActionResult Create([Bind(Include = "Id,Year,Title,Amount,Publisher")] Magazine magazine)
         {
             if (ModelState.IsValid)
             {
-                db.ItemBases.Add(cd);
+                db.ItemBases.Add(magazine);
                 db.SaveChanges();
                 return RedirectToAction("Create");
             }
 
-            return View(cd);
+            return View(magazine);
         }
 
-        // GET: Cds/Edit/5
+        // GET: Magazines/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cd cd = (Cd)db.ItemBases.Find(id);
-            if (cd == null)
+            Magazine magazine = (Magazine)db.ItemBases.Find(id);
+            if (magazine == null)
             {
                 return HttpNotFound();
             }
-            return View(cd);
+            return View(magazine);
         }
 
-        // POST: Cds/Edit/5
+        // POST: Magazines/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Year,Title,Amount,Artist,Director")] Cd cd)
+        public ActionResult Edit([Bind(Include = "Id,Year,Title,Amount,Publisher")] Magazine magazine)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(cd).State = EntityState.Modified;
+                db.Entry(magazine).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(cd);
+            return View(magazine);
         }
 
-        // GET: Cds/Delete/5
+        // GET: Magazines/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cd cd = (Cd)db.ItemBases.Find(id);
-            if (cd == null)
+            Magazine magazine = (Magazine)db.ItemBases.Find(id);
+            if (magazine == null)
             {
                 return HttpNotFound();
             }
-            return View(cd);
+            return View(magazine);
         }
 
-        // POST: Cds/Delete/5
+        // POST: Magazines/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Cd cd = (Cd)db.ItemBases.Find(id);
-            db.ItemBases.Remove(cd);
+            Magazine magazine = (Magazine)db.ItemBases.Find(id);
+            db.ItemBases.Remove(magazine);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

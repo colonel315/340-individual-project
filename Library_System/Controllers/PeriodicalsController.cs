@@ -11,108 +11,108 @@ using Library_System.Models;
 
 namespace Library_System.Controllers
 {
-    public class CdsController : Controller
+    public class PeriodicalsController : Controller
     {
         private LibraryContext db = new LibraryContext();
 
-        // GET: Cds
+        // GET: Periodicals
         public ActionResult Index()
         {
             return View();
-//            return View((Cd)db.ItemBases.ToList());
+//            return View(db.ItemBases.ToList());
         }
 
-        // GET: Cds/Details/5
+        // GET: Periodicals/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cd cd = (Cd)db.ItemBases.Find(id);
-            if (cd == null)
+            Periodical periodical = (Periodical)db.ItemBases.Find(id);
+            if (periodical == null)
             {
                 return HttpNotFound();
             }
-            return View(cd);
+            return View(periodical);
         }
 
-        // GET: Cds/Create
+        // GET: Periodicals/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Cds/Create
+        // POST: Periodicals/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,Year,Title,Amount,Artist,Director")] Cd cd)
+        public ActionResult Create([Bind(Include = "Id,Year,Title,Amount,Publisher,Version,Author")] Periodical periodical)
         {
             if (ModelState.IsValid)
             {
-                db.ItemBases.Add(cd);
+                db.ItemBases.Add(periodical);
                 db.SaveChanges();
                 return RedirectToAction("Create");
             }
 
-            return View(cd);
+            return View(periodical);
         }
 
-        // GET: Cds/Edit/5
+        // GET: Periodicals/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cd cd = (Cd)db.ItemBases.Find(id);
-            if (cd == null)
+            Periodical periodical = (Periodical)db.ItemBases.Find(id);
+            if (periodical == null)
             {
                 return HttpNotFound();
             }
-            return View(cd);
+            return View(periodical);
         }
 
-        // POST: Cds/Edit/5
+        // POST: Periodicals/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,Year,Title,Amount,Artist,Director")] Cd cd)
+        public ActionResult Edit([Bind(Include = "Id,Year,Title,Amount,Publisher,Version,Author")] Periodical periodical)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(cd).State = EntityState.Modified;
+                db.Entry(periodical).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(cd);
+            return View(periodical);
         }
 
-        // GET: Cds/Delete/5
+        // GET: Periodicals/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Cd cd = (Cd)db.ItemBases.Find(id);
-            if (cd == null)
+            Periodical periodical = (Periodical)db.ItemBases.Find(id);
+            if (periodical == null)
             {
                 return HttpNotFound();
             }
-            return View(cd);
+            return View(periodical);
         }
 
-        // POST: Cds/Delete/5
+        // POST: Periodicals/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Cd cd = (Cd)db.ItemBases.Find(id);
-            db.ItemBases.Remove(cd);
+            Periodical periodical = (Periodical)db.ItemBases.Find(id);
+            db.ItemBases.Remove(periodical);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
