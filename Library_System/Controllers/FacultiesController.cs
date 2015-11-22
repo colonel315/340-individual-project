@@ -18,7 +18,20 @@ namespace Library_System.Controllers
         // GET: Faculties
         public ActionResult Index()
         {
-            return View();
+            //            return View();
+            ICollection<UserBase> users = db.UserBases.ToList();
+            ICollection<Faculty> faculties = new List<Faculty>();
+
+            foreach (UserBase user in users)
+            {
+                // need to check discriminator type, since UserBases contains Student and Falculty
+                if (user.GetType().Name.Equals("Faculty"))
+                {
+                    faculties.Add((Faculty)user);
+                }
+            }
+
+            return View(faculties.ToList());
         }
 
         // GET: Faculties/Details/5

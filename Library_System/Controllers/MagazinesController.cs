@@ -18,8 +18,20 @@ namespace Library_System.Controllers
         // GET: Magazines
         public ActionResult Index()
         {
-            return View();
-//            return View(db.ItemBases.ToList());
+            //            return View();
+            ICollection<ItemBase> items = db.ItemBases.ToList();
+            ICollection<Magazine> magazines = new List<Magazine>();
+
+            foreach (ItemBase item in items)
+            {
+                // need to check discriminator type, since UserBases contains Student and Falculty
+                if (item.GetType().Name.Equals("Magazine"))
+                {
+                    magazines.Add((Magazine)item);
+                }
+            }
+
+            return View(magazines.ToList());
         }
 
         // GET: Magazines/Details/5

@@ -18,8 +18,20 @@ namespace Library_System.Controllers
         // GET: Cds
         public ActionResult Index()
         {
-            return View();
-//            return View((Cd)db.ItemBases.ToList());
+            // return View();
+            ICollection<ItemBase> items = db.ItemBases.ToList();
+            ICollection<Cd> cd = new List<Cd>();
+
+            foreach (ItemBase item in items)
+            {
+                // need to check discriminator type, since UserBases contains Student and Falculty
+                if (item.GetType().Name.Equals("Cd"))
+                {
+                    cd.Add((Cd)item);
+                }
+            }
+
+            return View(cd.ToList());
         }
 
         // GET: Cds/Details/5

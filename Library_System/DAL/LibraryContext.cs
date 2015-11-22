@@ -14,19 +14,12 @@ namespace Library_System.DAL
 
         // User Models
         public virtual DbSet<UserBase> UserBases { get; set; }
-        /*public DbSet<LibrarianModel> Librarians { get; set; }
-        public DbSet<FacultyModel> Faculties { get; set; }
-        public DbSet<StudentModel> Students { get; set; }*/
 
         // Containts checkout date
         public virtual DbSet<CheckOut> CheckOuts { get; set; }
 
         // Item Models
         public virtual DbSet<ItemBase> ItemBases { get; set; }
-        /*public DbSet<BookModel> Books { get; set; }
-        public DbSet<PeriodicalModel> Periodicals { get; set; }
-        public DbSet<MagazineModel> Magazines { get; set; }
-        public DbSet<CdModel> Cds { get; set; }*/
 
         public LibraryContext() : base("DefaultConnection") { }
 

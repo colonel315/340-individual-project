@@ -9,13 +9,25 @@
 
 </head>
 <body>
-    @Html.Partial("_NavPartial")
+    <div class="wrapper">
+        @Html.Partial("_NavPartial")
 
-    @RenderBody()
+        @RenderBody()
+    </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @Scripts.Render("~/Scripts/js")
+    <!-- Page-Level Demo Scripts - Tables - Use for reference -->
+    <script>
+            $(document).ready(function() {
+                $('#dataTables').DataTable({
+                    responsive: true,
+                    "aLengthMenu": [5, 10, 15, 20],
+                    "iDisplayLength": 5
+                });
+            });
+    </script>
     @RenderSection("scripts", required: false)
 </body>
 </html>

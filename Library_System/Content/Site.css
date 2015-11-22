@@ -7,6 +7,11 @@ body {
     background-color: #27ae60;
 }
 
+.form-inline .form-control {
+    width: auto;
+    vertical-align: middle;
+}
+
 .vertical-center {
     vertical-align: middle !important;
 }

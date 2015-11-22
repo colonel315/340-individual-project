@@ -30,9 +30,9 @@ namespace Library_System
                       "~/Content/Site.css"));
 
             bundles.Add(new ScriptBundle("~/Scripts/js").Include(
+                      "~/Scripts/metisMenu.js",
                       "~/Scripts/jquery.dataTables.js",
                       "~/Scripts/dataTables.bootstrap.js",
-                      "~/Scripts/metisMenu.js",
                       "~/Scripts/sb-admin-2.js"));
         }
     }

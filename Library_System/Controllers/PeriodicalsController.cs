@@ -18,8 +18,20 @@ namespace Library_System.Controllers
         // GET: Periodicals
         public ActionResult Index()
         {
-            return View();
-//            return View(db.ItemBases.ToList());
+            //            return View();
+            ICollection<ItemBase> items = db.ItemBases.ToList();
+            ICollection<Periodical> periodicals = new List<Periodical>();
+
+            foreach (ItemBase item in items)
+            {
+                // need to check discriminator type, since UserBases contains Student and Falculty
+                if (item.GetType().Name.Equals("Periodical"))
+                {
+                    periodicals.Add((Periodical)item);
+                }
+            }
+
+            return View(periodicals.ToList());
         }
 
         // GET: Periodicals/Details/5
