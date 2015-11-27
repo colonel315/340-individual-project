@@ -2,14 +2,19 @@
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Security.Claims;
+using System.Web;
+using Microsoft.Owin.Security;
 using System.Web.Mvc;
 using Library_System.DAL;
 using Library_System.Models;
+using Microsoft.AspNet.Identity;
 
 namespace Library_System.Controllers
 {
     public class LibrariansController : Controller
     {
+        IAuthenticationManager Authentication => HttpContext.GetOwinContext().Authentication;
         private LibraryContext db = new LibraryContext();
 
         // GET: Librarians
@@ -37,8 +42,32 @@ namespace Library_System.Controllers
             }
             else
             {
+                var identity = new ClaimsIdentity(
+                    new[]
+                    {
+                        new Claim(ClaimTypes.Name, employeeId),
+                    }, 
+                    DefaultAuthenticationTypes.ApplicationCookie,
+                    ClaimTypes.Name, ClaimTypes.Role
+                );
+
+                identity.AddClaim(new Claim(ClaimTypes.Role, "Librarian"));
+                identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, $"{employeeId}"));
+
+                Authentication.SignIn(new AuthenticationProperties
+                {}, identity);
+
+
                 return RedirectToAction("Dashboard", "Home");
             }
+        }
+
+        [HttpGet]
+        [Authorize]
+        public ActionResult Logout()
+        {
+            Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            return RedirectToAction("Index");
         }
 
         // GET: Librarians/Details/5

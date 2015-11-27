@@ -178,6 +178,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BooksController.cs" />
     <Compile Include="Controllers\CdsController.cs" />
+    <Compile Include="Controllers\CheckOutsController.cs" />
     <Compile Include="Controllers\FacultiesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LibrariansController.cs" />
@@ -192,6 +193,7 @@
     <Compile Include="Models\Book.cs" />
     <Compile Include="Models\Cd.cs" />
     <Compile Include="Models\CheckOut.cs" />
+    <Compile Include="Models\ClientBase.cs" />
     <Compile Include="Models\Faculty.cs" />
     <Compile Include="Models\IdentityModel.cs" />
     <Compile Include="Models\ItemBase.cs" />
@@ -292,11 +294,6 @@
     <Content Include="Views\Shared\_LibrariansLayout.cshtml" />
     <Content Include="Views\Shared\_NavPartial.cshtml" />
     <Content Include="Views\Shared\_SideNavPartial.cshtml" />
-    <Content Include="Views\Librarians\Create.cshtml" />
-    <Content Include="Views\Librarians\Delete.cshtml" />
-    <Content Include="Views\Librarians\Details.cshtml" />
-    <Content Include="Views\Librarians\Edit.cshtml" />
-    <Content Include="Views\Librarians\Index.cshtml" />
     <Content Include="Views\Students\Create.cshtml" />
     <Content Include="Views\Students\Delete.cshtml" />
     <Content Include="Views\Students\Details.cshtml" />
@@ -327,6 +324,16 @@
     <Content Include="Views\Periodicals\Details.cshtml" />
     <Content Include="Views\Periodicals\Edit.cshtml" />
     <Content Include="Views\Periodicals\Index.cshtml" />
+    <Content Include="Views\CheckOuts\Create.cshtml" />
+    <Content Include="Views\CheckOuts\Delete.cshtml" />
+    <Content Include="Views\CheckOuts\Details.cshtml" />
+    <Content Include="Views\CheckOuts\Edit.cshtml" />
+    <Content Include="Views\CheckOuts\Index.cshtml" />
+    <Content Include="Views\Librarians\Create.cshtml" />
+    <Content Include="Views\Librarians\Delete.cshtml" />
+    <Content Include="Views\Librarians\Details.cshtml" />
+    <Content Include="Views\Librarians\Edit.cshtml" />
+    <Content Include="Views\Librarians\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -11,6 +11,7 @@ using Library_System.Models;
 
 namespace Library_System.Controllers
 {
+    [Authorize]
     public class BooksController : Controller
     {
         private LibraryContext db = new LibraryContext();
@@ -115,7 +116,7 @@ namespace Library_System.Controllers
             {
                 return HttpNotFound();
             }
-            return View(book);
+            return RedirectToAction("Delete");
         }
 
         // POST: Books/Delete/5

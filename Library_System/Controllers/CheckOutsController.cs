@@ -11,135 +11,116 @@ using Library_System.Models;
 
 namespace Library_System.Controllers
 {
-    [Authorize]
-    public class StudentsController : Controller
+    public class CheckOutsController : Controller
     {
         private LibraryContext db = new LibraryContext();
 
-        // GET: Students
+        // GET: CheckOuts
         public ActionResult Index()
         {
-//            return View();
-            ICollection<UserBase> users = db.UserBases.ToList();
-            ICollection<Student> students = new List<Student>();
-
-            foreach (UserBase user in users)
-            {
-                // need to check discriminator type, since UserBases contains Student and Falculty
-                if (user.GetType().Name.Equals("Student"))
-                {
-                    students.Add((Student) user);
-                }
-            }
-
-            return View(students.ToList());
+            var checkOuts = db.CheckOuts.Include(c => c.ItemBase).Include(c => c.Users);
+            return View(checkOuts.ToList());
         }
 
-        // GET: Students/Details/5
+        // GET: CheckOuts/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = (Student)db.UserBases.Find(id);
-            if (student == null)
+            CheckOut checkOut = db.CheckOuts.Find(id);
+            if (checkOut == null)
             {
                 return HttpNotFound();
             }
-            return View(student);
+            return View(checkOut);
         }
 
-        // GET: Students/Create
+        // GET: CheckOuts/Create
         public ActionResult Create()
         {
+            ViewBag.ItemId = new SelectList(db.ItemBases, "Id", "Title");
+            ViewBag.UserId = new SelectList(db.UserBases, "Id", "ClientId");
             return View();
         }
 
-        // POST: Students/Create
+        // POST: CheckOuts/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,LastName,FirstName,ClientId")] Student student)
+        public ActionResult Create([Bind(Include = "Id,UserId,ItemId")] CheckOut checkOut)
         {
             if (ModelState.IsValid)
             {
-                var studentExist = 
-                    db.UserBases.OfType<Student>()
-                    .Where(s => s.ClientId == student.ClientId)
-                    .FirstOrDefault();
-
-                if (studentExist == null)
-                {
-                    db.UserBases.Add(student);
-                    db.SaveChanges();
-                    return RedirectToAction("Create");
-                }
-                else
-                {
-                    ModelState.AddModelError(String.Empty, "This client ID is already taken.");
-                    return View();
-                }
-                
+                db.CheckOuts.Add(checkOut);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
 
-            return View(student);
+            ViewBag.ItemId = new SelectList(db.ItemBases, "Id", "Title", checkOut.ItemId);
+            ViewBag.UserId = new SelectList(db.UserBases, "Id", "ClientId", checkOut.UserId);
+            return View(checkOut);
         }
 
-        // GET: Students/Edit/5
+        // GET: CheckOuts/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = (Student)db.UserBases.Find(id);
-            if (student == null)
+            CheckOut checkOut = db.CheckOuts.Find(id);
+            if (checkOut == null)
             {
                 return HttpNotFound();
             }
-            return View(student);
+            ViewBag.ItemId = new SelectList(db.ItemBases, "Id", "Year", checkOut.ItemId);
+            ViewBag.UserId = new SelectList(db.UserBases, "Id", "LastName", checkOut.UserId);
+            return View(checkOut);
         }
 
-        // POST: Students/Edit/5
+        // POST: CheckOuts/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,LastName,FirstName,StudentId")] Student student)
+        public ActionResult Edit([Bind(Include = "Id,UserId,ItemId")] CheckOut checkOut)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(student).State = EntityState.Modified;
+                db.Entry(checkOut).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(student);
+            ViewBag.ItemId = new SelectList(db.ItemBases, "Id", "Year", checkOut.ItemId);
+            ViewBag.UserId = new SelectList(db.UserBases, "Id", "LastName", checkOut.UserId);
+            return View(checkOut);
         }
 
-        // GET: Students/Delete/5
+        // GET: CheckOuts/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Student student = (Student)db.UserBases.Find(id);
-            if (student == null)
+            CheckOut checkOut = db.CheckOuts.Find(id);
+            if (checkOut == null)
             {
                 return HttpNotFound();
             }
-            return View(student);
+            return View(checkOut);
         }
 
-        // POST: Students/Delete/5
+        // POST: CheckOuts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Student student = (Student)db.UserBases.Find(id);
-            db.UserBases.Remove(student);
+            CheckOut checkOut = db.CheckOuts.Find(id);
+            db.CheckOuts.Remove(checkOut);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

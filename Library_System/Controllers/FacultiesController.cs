@@ -11,6 +11,7 @@ using Library_System.Models;
 
 namespace Library_System.Controllers
 {
+    [Authorize]
     public class FacultiesController : Controller
     {
         private LibraryContext db = new LibraryContext();
@@ -60,13 +61,26 @@ namespace Library_System.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,LastName,FirstName,FacultyId")] Faculty faculty)
+        public ActionResult Create([Bind(Include = "Id,LastName,FirstName,ClientId")] Faculty faculty)
         {
             if (ModelState.IsValid)
             {
-                db.UserBases.Add(faculty);
-                db.SaveChanges();
-                return RedirectToAction("Create");
+                var facultyExist =
+                    db.UserBases.OfType<Faculty>()
+                        .Where(f => f.ClientId == faculty.ClientId)
+                        .FirstOrDefault();
+
+                if (facultyExist == null)
+                {
+                    db.UserBases.Add(faculty);
+                    db.SaveChanges();
+                    return RedirectToAction("Create");
+                }
+                else
+                {
+                    ModelState.AddModelError(String.Empty, "This client ID is already taken.");
+                    return View();
+                }
             }
 
             return View(faculty);

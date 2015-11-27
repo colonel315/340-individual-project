@@ -11,6 +11,7 @@ using Library_System.Models;
 
 namespace Library_System.Controllers
 {
+    [Authorize]
     public class PeriodicalsController : Controller
     {
         private LibraryContext db = new LibraryContext();

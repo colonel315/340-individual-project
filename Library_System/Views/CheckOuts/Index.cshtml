@@ -1,11 +1,11 @@
-﻿@model IEnumerable<Library_System.Models.Faculty>
+﻿@model IEnumerable<Library_System.Models.CheckOut>
 
 <div id="page-wrapper">
     <div class="row">
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Search Faculty
+                    Search Book
                 </div>
             </div>
         </div>
@@ -17,13 +17,10 @@
                     <thead>
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.LastName)
+                                @Html.DisplayNameFor(model => model.ItemBase.Year)
                             </th>
                             <th>
-                                @Html.DisplayNameFor(model => model.FirstName)
-                            </th>
-                            <th>
-                                @Html.DisplayNameFor(model => model.ClientId)
+                                @Html.DisplayNameFor(model => model.Users.LastName)
                             </th>
                         </tr>
                     </thead>
@@ -32,13 +29,10 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.LastName)
+                                    @Html.DisplayFor(modelItem => item.ItemBase.Year)
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.FirstName)
-                                </td>
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.ClientId)
+                                    @Html.DisplayFor(modelItem => item.Users.LastName)
                                 </td>
                             </tr>
                         }

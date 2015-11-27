@@ -6,11 +6,7 @@ using System.Web;
 
 namespace Library_System.Models
 {
-    public class Student : UserBase
+    public class Student : ClientBase
     {
-        [Required]
-        [RegularExpression("([0-9]){9}", ErrorMessage = "A student ID has 9 digits.")]
-        [Display(Name = "Student ID")]
-        public string StudentId { get; set; }
     }
 }

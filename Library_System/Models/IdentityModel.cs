@@ -34,6 +34,6 @@ namespace Library_System.Models
 
         public System.Data.Entity.DbSet<Library_System.Models.ItemBase> ItemBases { get; set; }
 
-
+        public System.Data.Entity.DbSet<Library_System.Models.CheckOut> CheckOuts { get; set; }
     }
 }

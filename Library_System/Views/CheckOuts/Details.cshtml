@@ -1,0 +1,34 @@
+﻿@model Library_System.Models.CheckOut
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CheckOut</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ItemBase.Year)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ItemBase.Year)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Users.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Users.LastName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
