@@ -17,10 +17,13 @@
                     <thead>
                         <tr>
                             <th>
-                                @Html.DisplayNameFor(model => model.ItemBase.Year)
+                                @Html.DisplayNameFor(model => model.ItemBase.Title)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.Users.LastName)
+                            </th>
+                            <th>
+                                Action
                             </th>
                         </tr>
                     </thead>
@@ -29,10 +32,13 @@
                         {
                             <tr>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.ItemBase.Year)
+                                    @Html.DisplayFor(modelItem => item.ItemBase.Title)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Users.LastName)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
                                 </td>
                             </tr>
                         }

@@ -62,8 +62,9 @@
                                     @Html.DisplayFor(modelItem => item.Author)
                                 </td>
                                 <td>
-                                    @Html.ActionLink("Edit", "Edit", new { id = item.Id }, new { @class = "btn btn-warning" })
-                                    @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })
+                                    <a href="@Url.Action("Create", "CheckOuts")" class="btn btn-primary">Check Out</a>
+                                    @Html.ActionLink("Edit", "Edit", new {id = item.Id}, new {@class = "btn btn-warning"})
+                                    @Html.ActionLink("Delete", "Delete", new {id = item.Id}, new {@class = "btn btn-danger"})
                                 </td>
                             </tr>
                         }

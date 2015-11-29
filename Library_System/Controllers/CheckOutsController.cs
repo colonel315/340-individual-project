@@ -11,6 +11,7 @@ using Library_System.Models;
 
 namespace Library_System.Controllers
 {
+    [Authorize]
     public class CheckOutsController : Controller
     {
         private LibraryContext db = new LibraryContext();
@@ -41,7 +42,7 @@ namespace Library_System.Controllers
         public ActionResult Create()
         {
             ViewBag.ItemId = new SelectList(db.ItemBases, "Id", "Title");
-            ViewBag.UserId = new SelectList(db.UserBases, "Id", "ClientId");
+            ViewBag.UserId = new SelectList(db.UserBases.OfType<ClientBase>(), "Id", "ClientId");
             return View();
         }
 
@@ -56,7 +57,7 @@ namespace Library_System.Controllers
             {
                 db.CheckOuts.Add(checkOut);
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                return RedirectToAction("Create");
             }
 
             ViewBag.ItemId = new SelectList(db.ItemBases, "Id", "Title", checkOut.ItemId);

@@ -45,14 +45,13 @@ namespace Library_System.Controllers
                 var identity = new ClaimsIdentity(
                     new[]
                     {
-                        new Claim(ClaimTypes.Name, employeeId),
+                        new Claim(ClaimTypes.NameIdentifier, $"{employeeId}"),
+                        new Claim(ClaimTypes.Name, librarian.FirstName),
+                        new Claim(ClaimTypes.Role, "Librarian"),
                     }, 
                     DefaultAuthenticationTypes.ApplicationCookie,
-                    ClaimTypes.Name, ClaimTypes.Role
+                    ClaimTypes.NameIdentifier, ClaimTypes.Role
                 );
-
-                identity.AddClaim(new Claim(ClaimTypes.Role, "Librarian"));
-                identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, $"{employeeId}"));
 
                 Authentication.SignIn(new AuthenticationProperties
                 {}, identity);

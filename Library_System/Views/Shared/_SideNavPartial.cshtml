@@ -21,23 +21,11 @@
                 Search Faculty
             </a>
         </li>
-        <li>
-            <a href="@Url.Action("Create", "Students")">
-                <i class="fa fa-plus fa-fw"></i>
-                Add Students
-            </a>
-        </li>
-        <li>
-            <a href="@Url.Action("Create", "Faculties")">
-                <i class="fa fa-plus fa-fw"></i>
-                Add Faculty
-            </a>
-        </li>
     </ul>
 </li>
 <li>
     <a href="#">
-        <i class="fa fa-users fa-fw"></i> Items
+        <i class="fa fa-book fa-fw"></i> Items
         <span class="fa arrow"></span>
     </a>
     <ul class="nav nav-second-level collapse">
@@ -91,8 +79,12 @@
                 Add CDs/DVDs
             </a>
         </li>
-        
     </ul>
+</li>
+<li>
+    <a href="@Url.Action("Index", "CheckOuts")">
+        <i class="fa fa-archive fa-fw"></i> Search Check Outs
+    </a>
 </li>
 <li>
     <a href="@Url.Action("Logout", "Librarians")">

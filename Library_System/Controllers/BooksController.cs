@@ -116,7 +116,7 @@ namespace Library_System.Controllers
             {
                 return HttpNotFound();
             }
-            return RedirectToAction("Delete");
+            return View(book);
         }
 
         // POST: Books/Delete/5
