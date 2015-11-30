@@ -53,12 +53,14 @@ namespace Library_System.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "Id,UserId,ItemId")] CheckOut checkOut)
         {
-            if (ModelState.IsValid)
+            if (ModelState.IsValid && checkOut.canCheckout(checkOut.Users))
             {
                 db.CheckOuts.Add(checkOut);
                 db.SaveChanges();
                 return RedirectToAction("Create");
             }
+
+            ModelState.AddModelError(String.Empty, "Your client can't check this item out.");
 
             ViewBag.ItemId = new SelectList(db.ItemBases, "Id", "Title", checkOut.ItemId);
             ViewBag.UserId = new SelectList(db.UserBases, "Id", "ClientId", checkOut.UserId);

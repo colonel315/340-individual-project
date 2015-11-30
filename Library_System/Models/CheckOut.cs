@@ -31,5 +31,22 @@ namespace Library_System.Models
                 return 0;
             }
         }
+
+        public bool canCheckout(UserBase user)
+        {
+            if (this.GetType().IsEquivalentTo(typeof (Magazine)))
+            {
+                return false;
+            }
+            else if (this.GetType().IsEquivalentTo(typeof (Periodical)) &&
+                     user.GetType().IsEquivalentTo(typeof (Student)))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
     }
 }
