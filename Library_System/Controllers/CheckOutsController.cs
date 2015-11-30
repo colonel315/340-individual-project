@@ -107,11 +107,12 @@ namespace Library_System.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CheckOut checkOut = db.CheckOuts.Find(id);
+            CheckOut checkOut = db.CheckOuts.Where(c => c.Id == id).Include(c => c.ItemBase).Include(c => c.Users).FirstOrDefault();
             if (checkOut == null)
             {
                 return HttpNotFound();
             }
+            
             return View(checkOut);
         }
 
