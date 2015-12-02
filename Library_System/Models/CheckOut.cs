@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace Library_System.Models
@@ -8,13 +9,19 @@ namespace Library_System.Models
     {
         public int Id { get; set; }
 
+        [Required]
+        [Display(Name = "User Id")]
         public int UserId { get; set; }
         [ForeignKey("UserId")]
         public UserBase Users { get; set; }
 
+        [Required]
         public int ItemId { get; set; }
         [ForeignKey("ItemId")]
         public ItemBase ItemBase { get; set; }
+
+        [Display(Name = "Reserved?")]
+        public bool IsReserve { get; set; }
 
         public DateTime CheckoutDate { get; set; }
 
@@ -32,13 +39,13 @@ namespace Library_System.Models
             }
         }
 
-        public bool canCheckout(UserBase user)
+        public bool canCheckout(UserBase user, ItemBase item)
         {
-            if (this.GetType().IsEquivalentTo(typeof (Magazine)))
+            if (item.GetType().IsEquivalentTo(typeof (Magazine)))
             {
                 return false;
             }
-            else if (this.GetType().IsEquivalentTo(typeof (Periodical)) &&
+            else if (item.GetType().IsEquivalentTo(typeof (Periodical)) &&
                      user.GetType().IsEquivalentTo(typeof (Student)))
             {
                 return false;
@@ -47,6 +54,11 @@ namespace Library_System.Models
             {
                 return true;
             }
+        }
+
+        public string getCheckoutDate()
+        {
+            return this.CheckoutDate.ToString("MM/dd/yy");
         }
     }
 }

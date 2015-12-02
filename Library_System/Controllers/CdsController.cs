@@ -17,20 +17,45 @@ namespace Library_System.Controllers
         private LibraryContext db = new LibraryContext();
 
         // GET: Cds
-        public ActionResult Index()
+        public ActionResult Index(string attributes, string searchString)
         {
-            // return View();
-            ICollection<ItemBase> items = db.ItemBases.ToList();
-            ICollection<Cd> cd = new List<Cd>();
+            IQueryable<Cd> results = null;
 
-            foreach (ItemBase item in items)
+            switch (attributes)
             {
-                // need to check discriminator type, since UserBases contains Student and Falculty
-                if (item.GetType().Name.Equals("Cd"))
-                {
-                    cd.Add((Cd)item);
-                }
+                case "Title":
+                    results = db.ItemBases.OfType<Cd>().Where(p => p.Title.Contains(searchString));
+                    break;
+                case "Year":
+                    results = db.ItemBases.OfType<Cd>().Where(p => p.Year.Contains(searchString));
+                    break;
             }
+
+            if (String.IsNullOrEmpty(attributes))
+            {
+                results = db.ItemBases.OfType<Cd>();
+            }
+
+            var cd = results.ToList();
+
+            var attributeList = new List<string>();
+            attributeList.Add("Title");
+            attributeList.Add("Year");
+
+            ViewBag.Attributes = new SelectList(attributeList);
+
+            // return View();
+//            ICollection<ItemBase> items = db.ItemBases.ToList();
+//            ICollection<Cd> cd = new List<Cd>();
+//
+//            foreach (ItemBase item in items)
+//            {
+//                // need to check discriminator type, since UserBases contains Student and Falculty
+//                if (item.GetType().Name.Equals("Cd"))
+//                {
+//                    cd.Add((Cd)item);
+//                }
+//            }
 
             return View(cd.ToList());
         }

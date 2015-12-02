@@ -39,9 +39,16 @@ namespace Library_System.Controllers
         }
 
         // GET: CheckOuts/Create
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
-            ViewBag.ItemId = new SelectList(db.ItemBases, "Id", "Title");
+            var item = db.ItemBases.Find(id);
+            if (item == null)
+            {
+                ModelState.AddModelError(String.Empty, "Book does not exist.");
+                return RedirectToAction("Dashboard", "Home");
+            }
+//            ViewBag.ItemId = new SelectList(db.ItemBases, "Id", "Title");
+            ViewBag.Item = item;
             ViewBag.UserId = new SelectList(db.UserBases.OfType<ClientBase>(), "Id", "ClientId");
             return View();
         }
@@ -51,20 +58,49 @@ namespace Library_System.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,UserId,ItemId")] CheckOut checkOut)
+        public ActionResult Create([Bind(Include = "Id,UserId,ItemId,IsReserve")] CheckOut checkOut)
         {
-            if (ModelState.IsValid && checkOut.canCheckout(checkOut.Users))
+            bool canCheckOut = checkOut.canCheckout(db.UserBases.Find(checkOut.UserId),
+                db.ItemBases.Find(checkOut.ItemId));
+
+            if (ModelState.IsValid && canCheckOut && (isAvailable(checkOut) || checkOut.IsReserve))
             {
+                if (checkOut.IsReserve)
+                {
+                    checkOut.CheckoutDate = DateTime.Today.AddDays(7);
+                }
+                else
+                {
+                    checkOut.CheckoutDate = DateTime.Today;
+                }
+
                 db.CheckOuts.Add(checkOut);
                 db.SaveChanges();
-                return RedirectToAction("Create");
+                return RedirectToAction("Index");
             }
 
-            ModelState.AddModelError(String.Empty, "Your client can't check this item out.");
+            if (!canCheckOut)
+            {
+                ModelState.AddModelError(String.Empty, "Item can't be checked out due to item being either magazine or student checking out periodicals.");
+            }
+            else
+            {
+                ModelState.AddModelError(String.Empty, "This book is not available.");
+            }
 
-            ViewBag.ItemId = new SelectList(db.ItemBases, "Id", "Title", checkOut.ItemId);
-            ViewBag.UserId = new SelectList(db.UserBases, "Id", "ClientId", checkOut.UserId);
+            ViewBag.Item = db.ItemBases.Find(checkOut.ItemId);
+            ViewBag.UserId = new SelectList(db.UserBases.OfType<ClientBase>(), "Id", "ClientId", checkOut.UserId);
             return View(checkOut);
+        }
+
+        private bool isAvailable(CheckOut checkOut)
+        {
+            return count(checkOut.ItemId) < db.ItemBases.Find(checkOut.ItemId).Amount;
+        }
+
+        private int count(int itemId)
+        {
+            return db.CheckOuts.Count(c => c.ItemId == itemId);
         }
 
         // GET: CheckOuts/Edit/5

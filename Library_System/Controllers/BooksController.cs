@@ -17,20 +17,49 @@ namespace Library_System.Controllers
         private LibraryContext db = new LibraryContext();
 
         // GET: Books
-        public ActionResult Index()
+        public ActionResult Index(string attributes, string searchString)
         {
-            //            return View();
-            ICollection<ItemBase> items = db.ItemBases.ToList();
-            ICollection<Book> books = new List<Book>();
+            IQueryable<Book> results = null;
 
-            foreach (ItemBase item in items)
+            switch (attributes)
             {
-                // need to check discriminator type, since UserBases contains Student and Falculty
-                if (item.GetType().Name.Equals("Book"))
-                {
-                    books.Add((Book)item);
-                }
+                case "Title":
+                    results = db.ItemBases.OfType<Book>().Where(p => p.Title.Contains(searchString));
+                    break;
+                case "Author":
+                    results = db.ItemBases.OfType<Book>().Where(p => p.Author.Contains(searchString));
+                    break;
+                case "Year":
+                    results = db.ItemBases.OfType<Book>().Where(p => p.Year.Contains(searchString));
+                    break;
             }
+
+            if (String.IsNullOrEmpty(attributes))
+            {
+                results = db.ItemBases.OfType<Book>();
+            }
+
+            var books = results.ToList();
+
+            var attributeList = new List<string>();
+            attributeList.Add("Title");
+            attributeList.Add("Author");
+            attributeList.Add("Year");
+
+            ViewBag.Attributes = new SelectList(attributeList);
+
+            //            return View();
+            //            ICollection<ItemBase> items = db.ItemBases.ToList();
+            //            ICollection<Book> books = new List<Book>();
+            //
+            //            foreach (ItemBase item in items)
+            //            {
+            //                // need to check discriminator type, since UserBases contains Student and Falculty
+            //                if (item.GetType().Name.Equals("Book"))
+            //                {
+            //                    books.Add((Book)item);
+            //                }
+            //            }
 
             return View(books.ToList());
         }

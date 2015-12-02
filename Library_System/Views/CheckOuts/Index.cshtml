@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Library_System.Models.CheckOut>
+﻿@using Library_System.Models
+@model IEnumerable<Library_System.Models.CheckOut>
 
 <div id="page-wrapper">
     <div class="row">
@@ -23,6 +24,12 @@
                                 @Html.DisplayNameFor(model => model.Users.LastName)
                             </th>
                             <th>
+                                Late Fee
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.IsReserve)
+                            </th>
+                            <th>
                                 Action
                             </th>
                         </tr>
@@ -36,6 +43,19 @@
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.Users.LastName)
+                                </td>
+                                <td>
+                                    $@item.lateFee().00
+                                </td>
+                                <td>
+                                    @if (item.IsReserve)
+                                    {
+                                        <i class="fa fa-check fa-fw"></i> @item.getCheckoutDate()
+                                    }
+                                    else
+                                    {
+                                        <i class="fa fa-times"></i>
+                                    }
                                 </td>
                                 <td>
                                     @Html.ActionLink("Delete", "Delete", new { id = item.Id }, new { @class = "btn btn-danger" })

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
@@ -17,22 +18,51 @@ namespace Library_System.Controllers
         private LibraryContext db = new LibraryContext();
 
         // GET: Periodicals
-        public ActionResult Index()
+        public ActionResult Index(string attributes, string searchString)
         {
-            //            return View();
-            ICollection<ItemBase> items = db.ItemBases.ToList();
-            ICollection<Periodical> periodicals = new List<Periodical>();
+            IQueryable<Periodical> results = null;
 
-            foreach (ItemBase item in items)
+            switch (attributes)
             {
-                // need to check discriminator type, since UserBases contains Student and Falculty
-                if (item.GetType().Name.Equals("Periodical"))
-                {
-                    periodicals.Add((Periodical)item);
-                }
+                case "Title":
+                    results = db.ItemBases.OfType<Periodical>().Where(p => p.Title.Contains(searchString));
+                    break;
+                case "Author":
+                    results = db.ItemBases.OfType<Periodical>().Where(p => p.Author.Contains(searchString));
+                    break;
+                case "Year":
+                    results = db.ItemBases.OfType<Periodical>().Where(p => p.Year.Contains(searchString));
+                    break;
             }
 
-            return View(periodicals.ToList());
+            if (String.IsNullOrEmpty(attributes))
+            {
+                results = db.ItemBases.OfType<Periodical>();
+            }
+
+            var periodicals = results.ToList();
+
+            var attributeList = new List<string>();
+            attributeList.Add("Title");
+            attributeList.Add("Author");
+            attributeList.Add("Year");
+
+            ViewBag.Attributes = new SelectList(attributeList);
+
+            //            return View();
+//            ICollection<ItemBase> items = db.ItemBases.ToList();
+//            ICollection<Periodical> periodicals = new List<Periodical>();
+//
+//            foreach (ItemBase item in items)
+//            {
+//                // need to check discriminator type, since UserBases contains Student and Falculty
+//                if (item.GetType().Name.Equals("Periodical"))
+//                {
+//                    periodicals.Add((Periodical)item);
+//                }
+//            }
+
+            return View(periodicals);
         }
 
         // GET: Periodicals/Details/5

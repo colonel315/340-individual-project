@@ -1,4 +1,12 @@
-﻿html {
+﻿.bottom-15 {
+    margin-bottom: 15px;
+}
+
+.top-11 {
+    margin-top: 11px;
+}
+
+html {
     height: 100%;
 }
 

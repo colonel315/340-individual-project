@@ -17,22 +17,47 @@ namespace Library_System.Controllers
         private LibraryContext db = new LibraryContext();
 
         // GET: Magazines
-        public ActionResult Index()
+        public ActionResult Index(string attributes, string searchString)
         {
-            //            return View();
-            ICollection<ItemBase> items = db.ItemBases.ToList();
-            ICollection<Magazine> magazines = new List<Magazine>();
+            IQueryable<Magazine> results = null;
 
-            foreach (ItemBase item in items)
+            switch (attributes)
             {
-                // need to check discriminator type, since UserBases contains Student and Falculty
-                if (item.GetType().Name.Equals("Magazine"))
-                {
-                    magazines.Add((Magazine)item);
-                }
+                case "Title":
+                    results = db.ItemBases.OfType<Magazine>().Where(p => p.Title.Contains(searchString));
+                    break;
+                case "Year":
+                    results = db.ItemBases.OfType<Magazine>().Where(p => p.Year.Contains(searchString));
+                    break;
             }
 
-            return View(magazines.ToList());
+            if (String.IsNullOrEmpty(attributes))
+            {
+                results = db.ItemBases.OfType<Magazine>();
+            }
+
+            var magazines = results.ToList();
+
+            var attributeList = new List<string>();
+            attributeList.Add("Title");
+            attributeList.Add("Year");
+
+            ViewBag.Attributes = new SelectList(attributeList);
+
+            //            return View();
+            //            ICollection<ItemBase> items = db.ItemBases.ToList();
+            //            ICollection<Magazine> magazines = new List<Magazine>();
+            //
+            //            foreach (ItemBase item in items)
+            //            {
+            //                // need to check discriminator type, since UserBases contains Student and Falculty
+            //                if (item.GetType().Name.Equals("Magazine"))
+            //                {
+            //                    magazines.Add((Magazine)item);
+            //                }
+            //            }
+
+            return View(magazines);
         }
 
         // GET: Magazines/Details/5

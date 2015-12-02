@@ -17,22 +17,50 @@ namespace Library_System.Controllers
         private LibraryContext db = new LibraryContext();
 
         // GET: Faculties
-        public ActionResult Index()
+        public ActionResult Index(string attributes, string searchString)
         {
-            //            return View();
-            ICollection<UserBase> users = db.UserBases.ToList();
-            ICollection<Faculty> faculties = new List<Faculty>();
+            IQueryable<Faculty> results = null;
 
-            foreach (UserBase user in users)
+            switch (attributes)
             {
-                // need to check discriminator type, since UserBases contains Student and Falculty
-                if (user.GetType().Name.Equals("Faculty"))
-                {
-                    faculties.Add((Faculty)user);
-                }
+                case "First Name":
+                    results = db.UserBases.OfType<Faculty>().Where(p => p.FirstName.Contains(searchString));
+                    break;
+                case "Last Name":
+                    results = db.UserBases.OfType<Faculty>().Where(p => p.LastName.Contains(searchString));
+                    break;
+                case "Id":
+                    results = db.UserBases.OfType<Faculty>().Where(p => p.ClientId.Equals(searchString));
+                    break;
             }
 
-            return View(faculties.ToList());
+            if (String.IsNullOrEmpty(attributes))
+            {
+                results = db.UserBases.OfType<Faculty>();
+            }
+
+            var faculties = results.ToList();
+
+            var attributeList = new List<string>();
+            attributeList.Add("First Name");
+            attributeList.Add("Last Name");
+            attributeList.Add("Id");
+
+            ViewBag.Attributes = new SelectList(attributeList);
+            //            return View();
+            //            ICollection<UserBase> users = db.UserBases.ToList();
+            //            ICollection<Faculty> faculties = new List<Faculty>();
+            //
+            //            foreach (UserBase user in users)
+            //            {
+            //                // need to check discriminator type, since UserBases contains Student and Falculty
+            //                if (user.GetType().Name.Equals("Faculty"))
+            //                {
+            //                    faculties.Add((Faculty)user);
+            //                }
+            //            }
+
+            return View(faculties);
         }
 
         // GET: Faculties/Details/5
